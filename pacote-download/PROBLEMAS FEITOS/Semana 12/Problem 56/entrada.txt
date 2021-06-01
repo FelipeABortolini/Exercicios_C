@@ -1,0 +1,10 @@
+quadrado
+100.5
+triângulo
+10
+5
+círculo
+7.0
+triângulo
+12.5
+8.8
