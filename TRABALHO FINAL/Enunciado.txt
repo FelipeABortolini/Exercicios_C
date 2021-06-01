@@ -1,0 +1,78 @@
+Enunciado:
+
+Uma máquina gera um arquivo com informações (log) no formato de linhas de texto agrupando as seguintes informações em cada linha: { longint momento, int duracao, int operacao, int status }
+
+- momento (dia*10000+hora*100+minuto) é o momento de início da operação, onde dia é o número do dia no ano, hora é a hora desse dia, minuto é o minuto dessa hora;
+
+- duracao é o tempo em minutos que a operacao levou para ser concluída ou apresentar erro;
+
+- operacao pode ser:
+
+1 - operação de carregar matéria-prima 1;
+
+2 - operação de carregar matéria-prima 2;
+
+3 - operação de carregar matéria-prima 3;
+
+4 - operação de processo de secagem;
+
+5 - operação de processo de lavagem; ou
+
+6 - operação de processo de tingimento;
+
+- status pode ser:
+
+0 - operação bem sucedida;
+
+1 - sobrecarga leve;
+
+2 - sobrecarga com probabilidade de dano; ou
+
+3 - parada por erro de funcionamento;
+
+Faça um programa que leia o arquivo de log da máquina (disponível abaixo) até o fim e gere as seguintes informações (cada aluno deverá resolver dois itens a serem sorteados ou definidos pelo professor):
+
+c) Qual o percentual de cada matéria prima carregada na máquina.q) Gere um arquivo contendo quantas vezes aconteceram o estado de operação bem sucedida e depois parada por erro considerando operações diferentes;
+
+r) Gere um arquivo contendo quantas vezes os status 1, 2 e 3 não foram executadas em sequência;
+
+Dicas:
+
+A) para extrair o dia, a hora, obtenha a parte inteira da divisão por 10000 ou 100. Subtraia os dias vezes 1000 para encontrar a hora e de forma parecida para o minuto.
+
+B) use o exemplo das transparências da aula 10 (arquivos) para ler o arquivo em modo texto. Lembre-se que o separador de cada informação é uma vírgula e não o espaço em branco como no exemplo: fscanf(“%d,%d,...”...).
+
+C) os vetores podem usar o próximo índice como indicador da semana avaliada ou do dia, ou da hora, etc.
+
+D) pode-se utilizar uma variável auxiliar para identificar que o processo está seguindo uma sequência. Na primeira vez a variável deve armazenar o código da operação/status a ser avaliado no início e quando ocorrer, essa variável auxiliar deve mudar para o próximo código de operação até que um código de fim seja alcançado.
+
+Exemplo: Indicar quantas vezes ocorre o carregamento da matéria prima 1 e depois 2 em seguida.
+
+Exemplo de conteúdo do arquivo Maq1.log (deverá ser fornecido pelo professor):
+
+
+Formato: momento, duracao, operação, status
+
+010606,14,1,0
+010614,4,4,1
+010639,7,5,0
+010726,32,1,0
+010744,21,2,3
+010831,32,4,0
+
+
+Pseudo-código:
+
+proxima_oper <- 4;
+enquanto não é fim de aquivo
+    lê nova linha em d, h, m, oper, stat;
+    se oper = proxima_oper;
+        se proxima_oper = 5
+            ct_seq <- ct_seq + 1;
+            proxima_oper <- 4;
+        senão
+            proxima_oper <- 5;
+    senão
+        proxima_oper <- 4;
+fecha arquivo
+mostrar("O número de vezes que a operação 1 aconteceu seguida da operação 2 foi: ", ct_seq);
